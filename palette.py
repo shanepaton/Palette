@@ -9,7 +9,7 @@ __status__ = "Development"
 import sys
 import random
 variables = [None] * 9
-inputVariable = None
+inputStorage = None
 
 # This grabs the file you want to load from the command line argument
 file_name = sys.argv[1]
@@ -39,13 +39,20 @@ for x in range(len(line)):
         if "decimal" in typeCheckText:
             variables[res[0]] = float(typeCheckText.replace('decimal ', ''))
 
+    # This allows for comments and deletes the line to prevent the interpriter from reading the line as code.
+    if "#" in line[x].split():
+        line[x] = ""
+
     # Paint prints to the console function
     if "PAINT" in line[x].split():
         # Self Explanatory: Print value from string minus `PAINT `
         if "USING BOTTLE" in line[x]:
             formatedUseText = line[x].replace('PAINT USING BOTTLE ', '')
             res = [int(i) for i in formatedUseText.split() if i.isdigit()]
-            print(variables[res[0]], end="")
+            print(variables[res[0]])
+        elif "USING INPUT" in line[x]:
+            formatedUseText = line[x].replace('PAINT USING INPUT ', '')
+            print(inputStorage)
         else:
             print(line[x].replace('PAINT ', ''), end="")
 
@@ -111,7 +118,7 @@ for x in range(len(line)):
         tempInput = input(">")
 
         # Stores the input gathered from input() and stores it in the global input variable
-        inputVariable = tempInput
+        inputStorage = tempInput
 
     # Should is a conditional statement which checks if the input is equal to the number 1
     if "SHOULD" in line[x].split():
@@ -120,7 +127,7 @@ for x in range(len(line)):
         
         if "EQUALINPUT" in formatedText.split():
 
-            if int(inputVariable) == 1:
+            if int(inputStorage) == 1:
 
                 if "SHOULDREDRAW" in line[x + 1]:
                     formatedRedrawText = line[x + 1].replace('SHOULDREDRAW ', '')
@@ -135,7 +142,7 @@ for x in range(len(line)):
         formatedText = line[x].replace('SHOULD NOT ', '')
 
         if "EQUALINPUT" in formatedText:
-            if int(inputVariable) != 1:
+            if int(inputStorage) != 1:
                 if "REDRAW" in line[x + 1]:
                     formatedRedrawText = line[x + 1].replace('REDRAW ', '')
                     res = [int(i) for i in formatedRedrawText.split() if i.isdigit()]
