@@ -65,6 +65,22 @@ for x in range(len(line)):
         # Sets the variable to the sum
         variables[variableValue] = added
 
+    if "SUBTRACT" in line[x].split():
+        # Removes `BLEND ` from the string
+        formatedText = line[x].replace('SUBTRACT ', '')
+
+        # Searches for all numbers in the operation and stores them in the array res[]
+        res = [int(i) for i in formatedText.split() if i.isdigit()]
+
+        # Sets a variable to last value of the array which is the variable to store to
+        variableValue = res[-1]
+
+        # Removes it since it was added to the total
+        total = res[0] - sum(res) + res[0] + res[-1]
+
+        # Sets the variable to the sum
+        variables[variableValue] = total
+
     # Redraw creates a loop taking in a value for its itterations
     if "REDRAW" in line[x].split():
         # Removes `REDRAW ` from the string
