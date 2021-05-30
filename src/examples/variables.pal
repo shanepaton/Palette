@@ -1,5 +1,5 @@
-BOTTLE 1 = text I am a variable!
+BOTTLE 1 = text Go checkout Length!
 
 PAINT USING BOTTLE 1
 
-DRY
+WASH
