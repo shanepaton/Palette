@@ -7,6 +7,7 @@ __email__ = "spaton08@gmail.com"
 __status__ = "Development"
 
 import sys
+import random
 variables = [None] * 9
 inputVariable = None
 
@@ -47,6 +48,14 @@ for x in range(len(line)):
             print(variables[res[0]], end="")
         else:
             print(line[x].replace('PAINT ', ''), end="")
+
+    if "SPLATTERPAINT" in line[x].split():
+        # Self Explanatory: Print value from string minus `PAINT `
+        formatedUseText = line[x].replace('SPLATTERPAINT ', '')
+        iterations = [int(i) for i in formatedUseText.split() if i.isdigit()]
+        for generation in range(int(iterations[0])):
+            print(chr(random.randint(32,126)), end="")
+
 
     # Blend adds values and stores them in a Bottle
     if "BLEND" in line[x].split():
