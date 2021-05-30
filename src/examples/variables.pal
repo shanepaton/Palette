@@ -1,0 +1,5 @@
+BOTTLE 1 = text I am a variable!
+
+PAINT USING BOTTLE 1
+
+DRY
