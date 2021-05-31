@@ -1,11 +1,3 @@
-__author__ = "Shane Paton"
-__copyright__ = "Copyright 2021, Shane Paton"
-__license__ = "MIT"
-__version__ = "1.0.0"
-__maintainer__ = "Shane Paton"
-__email__ = "spaton08@gmail.com"
-__status__ = "Development"
-
 import sys
 import random
 variables = [None] * 9
