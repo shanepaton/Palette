@@ -1,0 +1,27 @@
+One must dictate that the 10 variables will be named as 
+RED
+ORANGE
+YELLOW
+GREEN
+BLUE
+PURPLE
+PINK
+BROWN
+WHITE
+BLACK
+
+Also one must read the program file line by line
+
+One must use these keywords for operation 
+
+# [comment]
+MODIFY [change a paints value]
+PAINT [prints value or paint]
+SPLATTERPAINT [prints a random set of ASCII charecters ]
+BLEND [Adds values]
+SUBTRACT [Subtracts values]
+REDRAW [loop]
+INPUT [takes input]
+SHOULD [if = the number 1]
+SHOULD NOT [if = not the number one]
+WASH [Ends the program]

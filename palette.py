@@ -1,5 +1,19 @@
+from os import replace
 import sys
 import random
+#varNames = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK", "BROWN", "WHITE", "BLACK"]
+varNames = {
+    "RED": None,
+    "ORANGE": None,
+    "YELLOW": None,
+    "GREEN": None,
+    "BLUE": None,
+    "PURPLE": None,
+    "PINK": None,
+    "BROWN": None,
+    "BLACK": None,
+    "WHITE": None,
+}
 variables = [None] * 9
 inputStorage = None
 
@@ -14,11 +28,35 @@ with open (file_name, 'rt') as inputFile:   # Opens the file.
 if line[-1] != "WASH":
     raise Exception("Error: No WASH statement.")
 
+def getVarNameFromString(vname):
+    if vname == "RED":
+        return variables[0]
+    if vname == "ORANGE":
+        return variables[1]
+    if vname == "YELLOW":
+        return variables[2]
+    if vname == "GREEN":
+        return variables[3]
+    if vname == "BLUE":
+        return variables[4]
+    if vname == "PURPLE":
+        return variables[5]
+    if vname == "PINK":
+        return variables[6]
+    if vname == "BROWN":
+        return variables[7]
+    if vname == "WHITE":
+        return variables[8]
+    if vname == "BLACK":
+        return variables[9]
+
 for x in range(len(line)):
     if "BOTTLE" in line[x]:
         res = [int(i) for i in line[x].split() if i.isdigit()]
-        typeCheckText = line[x].replace('BOTTLE ' + str(res[0]) + " = ", '')
+        typeCheckText = line[x].replace('BOTTLE ' + str(res[0]) + " = ", '').strip('\n')
         # String is now text Hello WOORD
+        # BOTTLE 1 = lololl
+        # lololl
 
         # These if statements set types and remove their declarations from their strings
 
@@ -38,6 +76,9 @@ for x in range(len(line)):
     # Paint prints to the console function
     if "PAINT" in line[x].split():
         # Self Explanatory: Print value from string minus `PAINT `
+        if any(varNames in line[x].split() for varNames in line[x].split()):
+            line[x] = line[x].replace("RED", str(getVarNameFromString("RED")))
+
         if "USING BOTTLE" in line[x]:
             formatedUseText = line[x].replace('PAINT USING BOTTLE ', '')
             res = [int(i) for i in formatedUseText.split() if i.isdigit()]
