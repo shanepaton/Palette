@@ -29,45 +29,30 @@ if line[-1] != "WASH":
     raise Exception("Error: No WASH statement.")
 
 def getVarNameFromString(vname):
-    if vname == "RED":
-        return variables[0]
-    if vname == "ORANGE":
-        return variables[1]
-    if vname == "YELLOW":
-        return variables[2]
-    if vname == "GREEN":
-        return variables[3]
-    if vname == "BLUE":
-        return variables[4]
-    if vname == "PURPLE":
-        return variables[5]
-    if vname == "PINK":
-        return variables[6]
-    if vname == "BROWN":
-        return variables[7]
-    if vname == "WHITE":
-        return variables[8]
-    if vname == "BLACK":
-        return variables[9]
+    return varNames[vname]
 
 for x in range(len(line)):
-    if "BOTTLE" in line[x]:
+    if "MODIFY" in line[x]:
         res = [int(i) for i in line[x].split() if i.isdigit()]
-        typeCheckText = line[x].replace('BOTTLE ' + str(res[0]) + " = ", '').strip('\n')
+        #REplace these with dictonary version
+        typeCheckText = line[x].replace('MODIFY ', '').strip('\n')
+        typeCheckText2 = typeCheckText.replace("= ", '').strip('\n')
+
+        varNames["RED"] = typeCheckText2
         # String is now text Hello WOORD
         # BOTTLE 1 = lololl
         # lololl
 
         # These if statements set types and remove their declarations from their strings
 
-        if "text" in typeCheckText:
-            variables[res[0]] = str(typeCheckText.replace('text ', ''))
+        # if "text" in typeCheckText:
+        #     variables[res[0]] = str(typeCheckText.replace('text ', ''))
 
-        if "number" in typeCheckText:
-            variables[res[0]] = int(typeCheckText.replace('number ', ''))
+        # if "number" in typeCheckText:
+        #     variables[res[0]] = int(typeCheckText.replace('number ', ''))
 
-        if "decimal" in typeCheckText:
-            variables[res[0]] = float(typeCheckText.replace('decimal ', ''))
+        # if "decimal" in typeCheckText:
+        #     variables[res[0]] = float(typeCheckText.replace('decimal ', ''))
 
     # This allows for comments and deletes the line to prevent the interpriter from reading the line as code.
     if "#" in line[x].split():
@@ -77,7 +62,17 @@ for x in range(len(line)):
     if "PAINT" in line[x].split():
         # Self Explanatory: Print value from string minus `PAINT `
         if any(varNames in line[x].split() for varNames in line[x].split()):
+            #bad
             line[x] = line[x].replace("RED", str(getVarNameFromString("RED")))
+            line[x] = line[x].replace("ORANGE", str(getVarNameFromString("ORANGE")))
+            line[x] = line[x].replace("YELLOW", str(getVarNameFromString("YELLOW")))
+            line[x] = line[x].replace("GREEN", str(getVarNameFromString("GREEN")))
+            line[x] = line[x].replace("BLUE", str(getVarNameFromString("BLUE")))
+            line[x] = line[x].replace("PURPLE", str(getVarNameFromString("PURPLE")))
+            line[x] = line[x].replace("PINK", str(getVarNameFromString("PINK")))
+            line[x] = line[x].replace("BROWN", str(getVarNameFromString("BROWN")))
+            line[x] = line[x].replace("BLACK", str(getVarNameFromString("BLACK")))
+            line[x] = line[x].replace("WHITE", str(getVarNameFromString("WHITE")))
 
         if "USING BOTTLE" in line[x]:
             formatedUseText = line[x].replace('PAINT USING BOTTLE ', '')

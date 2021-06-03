@@ -1,4 +1,5 @@
-BOTTLE 0 = text lolo
-PAINT i hate this language RED test
-PAINT cfkggrkk RED asdasd
+MODIFY RED = text lolo
+#PAINT i hate this language RED test
+PAINT RED 
+#PAINT cfkggrkk RED asdasd
 WASH
