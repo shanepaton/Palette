@@ -33,26 +33,57 @@ def getVarNameFromString(vname):
 
 for x in range(len(line)):
     if "MODIFY" in line[x]:
-        res = [int(i) for i in line[x].split() if i.isdigit()]
+        varMod = ""
         #REplace these with dictonary version
         typeCheckText = line[x].replace('MODIFY ', '').strip('\n')
         typeCheckText2 = typeCheckText.replace("= ", '').strip('\n')
 
-        varNames["RED"] = typeCheckText2
-        # String is now text Hello WOORD
-        # BOTTLE 1 = lololl
-        # lololl
+        # God where do I begin with this badness
+        # The amount of repitition and wastefulness in this is sad
+        # This is bad
+        # Please for the love of Python please fix this mess
+        if "RED" in typeCheckText2:
+            typeCheckText3 = typeCheckText2.replace('RED ', '').strip('\n')
+            varMod = "RED"
+        if "ORANGE" in typeCheckText2:
+            typeCheckText3 = typeCheckText2.replace('ORANGE ', '').strip('\n')
+            varMod = "ORANGE"
+        if "YELLOW" in typeCheckText2:
+            typeCheckText3 = typeCheckText2.replace('YELLOW ', '').strip('\n')
+            varMod = "YELLOW"
+        if "GREEN" in typeCheckText2:
+            typeCheckText3 = typeCheckText2.replace('GREEN ', '').strip('\n')
+            varMod = "GREEN"
+        if "BLUE" in typeCheckText2:
+            typeCheckText3 = typeCheckText2.replace('BLUE ', '').strip('\n')
+            varMod = "BLUE"
+        if "PURPLE" in typeCheckText2:
+            typeCheckText3 = typeCheckText2.replace('PURPLE ', '').strip('\n')
+            varMod = "PURPLE"
+        if "PINK" in typeCheckText2:
+            typeCheckText3 = typeCheckText2.replace('PINK ', '').strip('\n')
+            varMod = "PINK"
+        if "BROWN" in typeCheckText2:
+            typeCheckText3 = typeCheckText2.replace('BROWN ', '').strip('\n')
+            varMod = "BROWN"
+        if "BLACK" in typeCheckText2:
+            typeCheckText3 = typeCheckText2.replace('BLACK ', '').strip('\n')
+            varMod = "BLACK"
 
-        # These if statements set types and remove their declarations from their strings
+        typeCheckText4 = "".strip('\n')
+        
+        if "text" in typeCheckText3:
+            typeCheckText4 = typeCheckText3.replace('text ', '')
+            varNames[varMod] = str(typeCheckText4.strip('\n'))
 
-        # if "text" in typeCheckText:
-        #     variables[res[0]] = str(typeCheckText.replace('text ', ''))
+        if "number" in typeCheckText3:
+            typeCheckText4 = typeCheckText3.replace('number ', '')
+            varNames[varMod] = int(typeCheckText4)
 
-        # if "number" in typeCheckText:
-        #     variables[res[0]] = int(typeCheckText.replace('number ', ''))
-
-        # if "decimal" in typeCheckText:
-        #     variables[res[0]] = float(typeCheckText.replace('decimal ', ''))
+        if "decimal" in typeCheckText3:
+            typeCheckText4 = typeCheckText3.replace('decimal ', '')
+            varNames[varMod] = float(typeCheckText4)
+        
 
     # This allows for comments and deletes the line to prevent the interpriter from reading the line as code.
     if "#" in line[x].split():
