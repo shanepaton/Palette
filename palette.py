@@ -1,7 +1,6 @@
 from os import replace
 import sys
 import random
-#varNames = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK", "BROWN", "WHITE", "BLACK"]
 varNames = {
     "RED": None,
     "ORANGE": None,
@@ -14,7 +13,7 @@ varNames = {
     "BLACK": None,
     "WHITE": None,
 }
-variables = [None] * 9
+
 inputStorage = None
 
 # This grabs the file you want to load from the command line argument
@@ -24,12 +23,15 @@ with open (file_name, 'rt') as inputFile:   # Opens the file.
     for inputLine in inputFile:             # For everyline line in the file,
         line.append(inputLine)              # store its contents in the array line[].
 
+variables = [None] * 9
+
 # Enforce the WASH which is used to close the file input
 if line[-1] != "WASH":
     raise Exception("Error: No WASH statement.")
 
 def getVarNameFromString(vname):
     return varNames[vname]
+
 
 for x in range(len(line)):
     if "MODIFY" in line[x]:
@@ -105,13 +107,8 @@ for x in range(len(line)):
             line[x] = line[x].replace("BLACK", str(getVarNameFromString("BLACK")))
             line[x] = line[x].replace("WHITE", str(getVarNameFromString("WHITE")))
 
-        if "USING BOTTLE" in line[x]:
-            formatedUseText = line[x].replace('PAINT USING BOTTLE ', '')
-            res = [int(i) for i in formatedUseText.split() if i.isdigit()]
-            print(variables[res[0]])
-        elif "USING INPUT" in line[x]:
-            formatedUseText = line[x].replace('PAINT USING INPUT ', '')
-            print(inputStorage)
+        elif "INPUT" in line[x]:
+            line[x] = line[x].replace(' INPUT ', '')
         else:
             print(line[x].replace('PAINT ', ''), end="")
 
@@ -131,11 +128,8 @@ for x in range(len(line)):
         # Searches for all numbers in the operation and stores them in the array res[]
         res = [int(i) for i in formatedText.split() if i.isdigit()]
 
-        # Sets a variable to last value of the array which is the variable to store to
-        variableValue = res[-1]
-
         # Removes it since it was added to the total
-        added = sum(res) - res[-1]
+        added = sum(res)
 
         # Sets the variable to the sum
         variables[variableValue] = added
