@@ -1,5 +1,5 @@
-BOTTLE 1 = text Go checkout Length!
+MODIFY RED = text Go checkout Length!
 
-PAINT USING BOTTLE 1
+PAINT RED
 
 WASH
